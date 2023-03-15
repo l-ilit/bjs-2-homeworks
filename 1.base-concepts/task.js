@@ -15,6 +15,33 @@ const d = ((b * b) - 4 * (a * c));
   arr = [x1, x2];
   }
   return arr;
+}
+
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-  
+  let payment;
+  let interestRate;
+  let loanBody;
+  let totalMortgage;
+  if (isNaN (contribution))
+    {
+    return false;
+  } 
+  else if (isNaN (percent))
+    {
+    return false;
+  } else if (isNaN (amount))
+  {
+  return false;
+} else if (isNaN (countMonths))
+{
+return false;
+} 
+  else {
+    interestRate = (percent / 100) / 12;
+    loanBody = amount - contribution;
+    payment = loanBody * (interestRate + (interestRate / (((1 + interestRate)**countMonths) - 1)));
+    totalMortgage = payment * countMonths;
+    totalMortgage = Math.round(totalMortgage*100)/100;
+    return totalMortgage
+  }
 }
