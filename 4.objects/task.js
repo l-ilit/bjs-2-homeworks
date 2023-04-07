@@ -12,17 +12,15 @@ Student.prototype.setSubject = function (subjectName) {
 }
 
 Student.prototype.addMarks = function (...marksToAdd) {
-  if (this.marks === undefined) {
-    console.log("Студент отчислен");
-  } else {
     return this.marks.push(...marksToAdd);
   }
-}
 
 Student.prototype.getAverage = function (...marks) {
-  let sum = this.marks.reduce((acc, marks) => acc + marks);
-  let avg = sum/this.marks.length;
-  return avg;
+  if ((this.marks == []) || (this.marks == undefined)) {
+    return 0;
+  }
+  let sum = this.marks.reduce((acc, marks) => acc + marks, 0);
+  return avg = sum/this.marks.length;
 }
 
 Student.prototype.exclude = function (reason) {
