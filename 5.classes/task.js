@@ -7,7 +7,7 @@ class PrintEditionItem {
         this.type = null;
     }
     fix() {
-       this.state = this.state * 1.5;
+       this.state *= 1.5;
     }
     set state(state) {
         if (state < 0){
@@ -58,9 +58,9 @@ class Library {
     this.name = name;
     this.books = [];
   }
-  addBook(printItem) {
+  addBook(book) {
     if (this.state > 30) {
-      this.books.push(printItem);
+      this.books.push(book);
     }
   }
   findBookBy (type, value) {
@@ -81,9 +81,23 @@ class Student {
   constructor (name) {
     this.marks = [];
   }
-  addMark(mark) {
+  addMark(mark, subject) {
     if ((mark < 2) || (mark > 5)) {
       return false;
+    } 
+
+    if (this.marks.includes(subject) === false) {
+      this.subject = [];
     }
-}
+    return this.marks.push(mark)[subject];
+    
+  }
+  getAverage(subject) {
+    Object.keys(subject);
+    getAverageBySubject(marks) {
+      let sum = this.marks.reduce((acc, marks) => acc + marks, 0)
+      return (sum/this.marks.length);
+    }
+    
+  }
 }
