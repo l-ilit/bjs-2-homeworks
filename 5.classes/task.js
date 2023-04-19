@@ -57,6 +57,7 @@ class Library {
   constructor (name, books) {
     this.name = name;
     this.books = [];
+    this.state = 100;
   }
   addBook(book) {
     if (this.state > 30) {
@@ -79,25 +80,27 @@ class Library {
   }
 class Student {
   constructor (name) {
-    this.marks = [];
+    this.marks = {};
   }
   addMark(mark, subject) {
     if ((mark < 2) || (mark > 5)) {
       return false;
     } 
 
-    if (this.marks.includes(subject) === false) {
-      this.subject = [];
+    if (this.marks.subject == undefined) {
+      this.marks.subject = [];
     }
-    return this.marks.push(mark)[subject];
+    return this.marks.subject.push(mark);
     
   }
-  getAverage(subject) {
-    Object.keys(subject);
-    getAverageBySubject(marks) {
-      let sum = this.marks.reduce((acc, marks) => acc + marks, 0)
-      return (sum/this.marks.length);
-    }
+  getAverageBySubject(subject) {
+    let sum = this.marks.subject.reduce((acc, marks) => acc + marks, 0)
+    return (sum/this.marks.subject.length);
+  }
+  getAverage () {
+    Object.keys(this.marks.subject);
     
+      }
+    }
   }
 }
