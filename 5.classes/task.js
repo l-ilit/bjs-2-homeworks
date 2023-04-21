@@ -57,10 +57,9 @@ class Library {
   constructor (name, books) {
     this.name = name;
     this.books = [];
-    this.state = 100;
   }
   addBook(book) {
-    if (this.state > 30) {
+    if (book.state > 30) {
       this.books.push(book);
     }
   }
@@ -94,13 +93,13 @@ class Student {
     
   }
   getAverageBySubject(subject) {
-    let sum = this.marks.subject.reduce((acc, marks) => acc + marks, 0)
+    let sum = this.marks.subject.reduce((acc, marks) => acc + marks, 0);
     return (sum/this.marks.subject.length);
   }
   getAverage () {
-    Object.keys(this.marks.subject);
+    let subjects = [];
+    subjects = Object.keys(this.marks.subject);
     
       }
     }
-  }
-}
+  
