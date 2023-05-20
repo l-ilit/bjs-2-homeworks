@@ -1,47 +1,46 @@
 class AlarmClock {
     constructor() {
     this.alarmCollection = [];
-    this.intervalID = null;
+    this.intervalId = null;
     }
 
     addClock(time, callback) {
-      if ((typeOf (this.time) === "undefined") || (typeOf (this.callback) === "undefined")) {
-        throw new Error("Отсутствуют обязательные аргументы")
+      if ((!time) || (!callback)) {
+        throw new Error("Отсутствуют обязательные аргументы");
       } 
-      if (typeOf (this.alarmCollection.find(clock => clock.time === time) != undefined)) {
+      let validTime = this.alarmCollection.some((clock) => clock.time == time);
+      if (validTime === true) {
         console.warn("Уже присутствует звонок на то же время")
       } 
-      let alarm = {callback, time, canCall};
+      let alarm = {callback, time, canCall: true};
       this.alarmCollection.push(alarm);
     }
     removeClock(time) {
-      this.alarmCollection.filter(clock => clock.time === time);
-      return this.alarmCollection.filter(el => !this.alarmCollection.includes(el));
+      this.alarmCollection = this.alarmCollection.filter(clock => clock.time !== time);
     }
     getCurrentFormatedTime() {
       return new Date().toLocaleTimeString("ru", {hour: "2-digit", minute: "2-digit"});  
     }
     start() {
-      if (this.intervalID != null) {
+      if (this.intervalId != null) {
         return;
       }
-      let interval = setInterval (() => {
-        this.alarmCollection.forEach((el) => checkTime(el));
+      this.intervalId = setInterval (() => {
+        this.alarmCollection.forEach((clock) => checkTime(clock));
       }, 1000);
-       this.intervalID = interval;
-       const checkTime = (el) => {
-        if ((this.getCurrentFormattedTime() === el.time) && (this.canCall === true)){
-          this.canCall = false;
-          return el.callback();
+       const checkTime = (clock) => {
+        if ((this.getCurrentFormattedTime() === clock.time) && (clock.canCall == true)) {
+          clock.canCall = false;
+          clock.callback();
         }
        }
     }
     stop() {
-      clearInterval(this.intervalID);
-      this.intervalID === null;
+      clearInterval(this.intervalId);
+      this.intervalId = null;
     }
     resetAllCalls() {
-      this.alarmCollection.forEach((el) => alarm.canCall = true);
+      this.alarmCollection.forEach((clock) => clock.canCall = true);
     }
     clearAlarms() {
       this.stop();
